@@ -15,8 +15,7 @@ changeUserNameBlueprint = Blueprint("changeUserName", __name__)
 
 @changeUserNameBlueprint.route("/changeusername", methods=["GET", "POST"])
 def changeUserName():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             form = changeUserNameForm(request.form)
             if request.method == "POST":
                 newUserName = request.form["newUserName"]
@@ -66,5 +65,5 @@ def changeUserName():
                         flash("username does not fit ascii charecters", "error")
 
             return render_template("changeUserName.html", form=form)
-        case False:
+    else:
             return redirect("/")
