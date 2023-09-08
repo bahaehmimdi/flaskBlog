@@ -5,8 +5,7 @@ setUserRoleBlueprint = Blueprint("setUserRole", __name__)
 
 @setUserRoleBlueprint.route("/setuserrole/<userName>/<newRole>")
 def setUserRole(userName,newRole):
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             connection = sqlite3.connect("db/users.db")
             cursor = connection.cursor()
             cursor.execute(
@@ -21,5 +20,5 @@ def setUserRole(userName,newRole):
                     return redirect("/admin/users")
                 case False:
                      return redirect("/")    
-        case False:
+    else:
             return redirect("/")    
