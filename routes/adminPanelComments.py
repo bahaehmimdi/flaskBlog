@@ -14,8 +14,7 @@ adminPanelCommentsBlueprint = Blueprint("adminPanelComments", __name__)
 @adminPanelCommentsBlueprint.route("/admin/comments", methods=["GET", "POST"])
 @adminPanelCommentsBlueprint.route("/adminpanel/comments", methods=["GET", "POST"])
 def adminPanelComments():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             connection = sqlite3.connect("db/users.db")
             cursor = connection.cursor()
             cursor.execute(
@@ -26,14 +25,13 @@ def adminPanelComments():
                 if "commentDeleteButton" in request.form:
                     deleteComment(request.form["commentID"])
                     return redirect(f"/admin/comments")
-            match role == "admin":
-                case True:
+            if role == "admin":
                     connection = sqlite3.connect("db/comments.db")
                     cursor = connection.cursor()
                     cursor.execute("select * from comments")
                     comments = cursor.fetchall()
                     return render_template("adminPanelComments.html", comments=comments)
-                case False:
+            else: 
                     return redirect("/")
-        case False:
+    else: 
             return redirect("/")
