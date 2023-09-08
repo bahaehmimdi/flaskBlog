@@ -88,7 +88,7 @@ def editPost(postID):
             else:   
                     message("1", f'POST: "{postID}" NOT FOUND')
                     return render_template("404.html")
-    else::
+    else:
             message("1", "USER NOT LOGGED IN")
             flash("you need login for edit a post", "error")
             return redirect("/login")
