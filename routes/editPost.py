@@ -17,8 +17,7 @@ editPostBlueprint = Blueprint("editPost", __name__)
 
 @editPostBlueprint.route("/editpost/<int:postID>", methods=["GET", "POST"])
 def editPost(postID):
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
             cursor.execute(f"select id from posts")
@@ -35,8 +34,7 @@ def editPost(postID):
                     cursor.execute(
                         f'select userName from users where userName="{session["userName"]}"'
                     )
-                    match post[4] == session["userName"]:
-                        case True:
+                    if post[4] == session["userName"]:
                             form = createPostForm(request.form)
                             form.postTitle.data = post[1]
                             form.postTags.data = post[2]
@@ -45,14 +43,13 @@ def editPost(postID):
                                 postTitle = request.form["postTitle"]
                                 postTags = request.form["postTags"]
                                 postContent = request.form["postContent"]
-                                match postContent == "":
-                                    case True:
+                                if postContent == "":
                                         flash("post content not be empty", "error")
                                         message(
                                             "1",
                                             f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                                         )
-                                    case False:
+                                else:
                                         connection = sqlite3.connect("db/posts.db")
                                         cursor = connection.cursor()
                                         cursor.execute(
@@ -82,7 +79,7 @@ def editPost(postID):
                                 content=post[3],
                                 form=form,
                             )
-                        case False:
+                    else:   
                             flash("this post not yours", "error")
                             message(
                                 "1",
@@ -92,7 +89,7 @@ def editPost(postID):
                 case False:
                     message("1", f'POST: "{postID}" NOT FOUND')
                     return render_template("404.html")
-        case False:
+    else::
             message("1", "USER NOT LOGGED IN")
             flash("you need login for edit a post", "error")
             return redirect("/login")
