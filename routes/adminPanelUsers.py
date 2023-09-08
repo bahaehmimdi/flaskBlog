@@ -33,7 +33,7 @@ def adminPanelUsers():
                         "adminPanelUsers.html",
                         users=users,
                     )
-            else False:
+            else :
                     return redirect("/")
     else:
             return redirect("/")
