@@ -16,8 +16,7 @@ changePasswordBlueprint = Blueprint("changePassword", __name__)
 
 @changePasswordBlueprint.route("/changepassword", methods=["GET", "POST"])
 def changePassword():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             form = changePasswordForm(request.form)
             if request.method == "POST":
                 oldPassword = request.form["oldPassword"]
@@ -51,7 +50,7 @@ def changePassword():
                     flash("old password wrong", "error")
 
             return render_template("changePassword.html", form=form)
-        case False:
+    else:
             message("1", "USER NOT LOGGED IN")
             flash("you need login for change your password", "error")
             return redirect("/login/redirect=changepassword")
