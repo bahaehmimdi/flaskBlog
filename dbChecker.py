@@ -13,7 +13,7 @@ def dbFolder():
 def usersTable():
     if exists("db/users.db"):
             message("6", 'DATABASE: "users.db" FOUND')
-     else:
+    else:
             message("1", 'DATABASE: "users.db" NOT FOUND')
             open("db/users.db", "x")
             message("2", 'DATABASE: "users.db" CREATED')
