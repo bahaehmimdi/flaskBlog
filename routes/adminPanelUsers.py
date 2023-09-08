@@ -24,8 +24,7 @@ def adminPanelUsers():
             if request.method == "POST":
                 if "userDeleteButton" in request.form:
                     deleteUser(request.form["userName"])
-            match role == "admin":
-                case True:
+            if role == "admin":
                     connection = sqlite3.connect("db/users.db")
                     cursor = connection.cursor()
                     cursor.execute("select * from users")
@@ -34,7 +33,7 @@ def adminPanelUsers():
                         "adminPanelUsers.html",
                         users=users,
                     )
-                case False:
+            else False:
                     return redirect("/")
     else:
             return redirect("/")
