@@ -21,10 +21,9 @@ def deleteUser(userName):
     cursor.execute(f"update sqlite_sequence set seq = seq-1")
     connection.commit()
     message("2", f'USER: "{userName}" DELETED')
-    match perpetrator[0] == "admin":
-        case True:
+    if perpetrator[0] == "admin":
             return redirect(f"/admin/users")
-        case False:
+    else:
             session.clear()
             return redirect(f"/")
 
