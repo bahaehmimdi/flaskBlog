@@ -14,8 +14,7 @@ def user(userName):
     cursor = connection.cursor()
     cursor.execute(f"select userName from users")
     users = cursor.fetchall()
-    match str(userName).lower() in str(users).lower():
-        case True:
+    if str(userName).lower() in str(users).lower():
             message("2", f'USER: "{userName}" FOUND')
             cursor.execute(f'select * from users where lower(userName) = "{userName}"')
             user = cursor.fetchone()
@@ -52,7 +51,6 @@ def user(userName):
                 showPosts=showPosts,
                 showComments=showComments,
             )
-
-        case _:
+    else:
             message("1", f'USER: "{userName}" NOT FOUND')
             return render_template("404.html")
