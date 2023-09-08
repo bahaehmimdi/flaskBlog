@@ -75,6 +75,6 @@ app.register_blueprint(adminPanelPostsBlueprint)
 app.register_blueprint(accountSettingsBlueprint)
 app.register_blueprint(adminPanelCommentsBlueprint)
 
-match __name__:
-    case "__main__":
+if __name__ == "__main__":
+
         app.run(debug=True, host=socket.gethostbyname(socket.gethostname()))
