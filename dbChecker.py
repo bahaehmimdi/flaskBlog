@@ -2,20 +2,18 @@ from helpers import mkdir, exists, message, sqlite3
 
 
 def dbFolder():
-    match exists("db"):
-        case True:
+    if exists("db"):
             message("6", 'Folder: "/db" FOUND')
-        case False:
+    else:
             message("1", 'Folder: "/db" NOT FOUND')
             mkdir("db")
             message("2", 'Folder: "/db" CREATED')
 
 
 def usersTable():
-    match exists("db/users.db"):
-        case True:
+    if exists("db/users.db"):
             message("6", 'DATABASE: "users.db" FOUND')
-        case False:
+     else:
             message("1", 'DATABASE: "users.db" NOT FOUND')
             open("db/users.db", "x")
             message("2", 'DATABASE: "users.db" CREATED')
@@ -47,10 +45,9 @@ def usersTable():
 
 
 def postsTable():
-    match exists("db/posts.db"):
-        case True:
+    if exists("db/posts.db"):
             message("6", 'DATABASE: "posts.db" FOUND')
-        case False:
+    else:
             message("1", 'DATABASE: "posts.db" NOT FOUND')
             open("db/posts.db", "x")
             message("2", 'DATABASE: "posts.db" CREATED')
@@ -83,10 +80,9 @@ def postsTable():
 
 
 def commentsTable():
-    match exists("db/comments.db"):
-        case True:
+    if exists("db/comments.db"):
             message("6", 'DATABASE: "comments.db" FOUND')
-        case False:
+    else:
             message("1", 'DATABASE: "comments.db" NOT FOUND')
             open("db/comments.db", "x")
             message("2", 'DATABASE: "comments.db" CREATED')
