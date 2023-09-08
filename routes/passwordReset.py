@@ -24,29 +24,25 @@ def passwordReset(codeSent):
     global userName
     global passwordResetCode
     form = passwordResetForm(request.form)
-    match codeSent:
-        case "true":
+    if codeSent:
             connection = sqlite3.connect("db/users.db")
             cursor = connection.cursor()
             if request.method == "POST":
                 code = request.form["code"]
                 password = request.form["password"]
                 passwordConfirm = request.form["passwordConfirm"]
-                match code == passwordResetCode:
-                    case True:
+                if code == passwordResetCode:
                         cursor.execute(
                             f'select password from users where lower(userName) = "{userName.lower()}"'
                         )
                         oldPassword = cursor.fetchone()[0]
-                        match password == passwordConfirm:
-                            case True:
-                                match sha256_crypt.verify(password, oldPassword):
-                                    case True:
+                        if password == passwordConfirm:
+                                if sha256_crypt.verify(password, oldPassword):
                                         flash(
                                             "new password can not be same with old password",
                                             "error",
                                         )
-                                    case False:
+                                else:
                                         password = sha256_crypt.hash(password)
                                         cursor.execute(
                                             f'update users set password = "{password}" where lower(userName) = "{userName.lower()}"'
@@ -61,12 +57,12 @@ def passwordReset(codeSent):
                                             "success",
                                         )
                                         return redirect("/login/redirect=&")
-                            case False:
+                        else:    
                                 flash("passwords must match", "error")
-                    case False:
+                else:
                         flash("Wrong Code", "error")
             return render_template("passwordReset.html", form=form, mailSent=True)
-        case "false":
+    else:
             if request.method == "POST":
                 userName = request.form["userName"]
                 email = request.form["email"]
@@ -81,8 +77,7 @@ def passwordReset(codeSent):
                     f'select * from users where lower(email) = "{email.lower()}"'
                 )
                 emailDB = cursor.fetchone()
-                match not userNameDB or not emailDB:
-                    case False:
+                if not (not userNameDB or not emailDB):
                         port = 587
                         smtp_server = "smtp.gmail.com"
                         context = ssl.create_default_context()
@@ -121,7 +116,7 @@ def passwordReset(codeSent):
                         )
                         flash("code sent", "success")
                         return redirect("/passwordreset/codesent=true")
-                    case True:
+                else:    
                         messageDebugging("1", f'USER: "{userName}" NOT FOUND')
                         flash("user not found", "error")
             return render_template("passwordReset.html", form=form, mailSent=False)
