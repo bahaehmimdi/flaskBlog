@@ -18,11 +18,10 @@ loginBlueprint = Blueprint("login", __name__)
 @loginBlueprint.route("/login/redirect=<direct>", methods=["GET", "POST"])
 def login(direct):
     direct = direct.replace("&", "/")
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
             return redirect(direct)
-        case False:
+    else:
             form = loginForm(request.form)
             if request.method == "POST":
                 userName = request.form["userName"]
