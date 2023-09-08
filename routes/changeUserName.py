@@ -26,14 +26,11 @@ def changeUserName():
                     f'select userName from users where userName = "{newUserName}"'
                 )
                 userNameCheck = cursor.fetchone()
-                match newUserName.isascii():
-                    case True:
-                        match newUserName == session["userName"]:
-                            case True:
+                if newUserName.isascii():
+                        if newUserName == session["userName"]:
                                 flash("this is your username", "error")
-                            case False:
-                                match userNameCheck == None:
-                                    case True:
+                        else:
+                                if userNameCheck == None:
                                         cursor.execute(
                                             f'update users set userName = "{newUserName}" where userName = "{session["userName"]}" '
                                         )
@@ -57,11 +54,11 @@ def changeUserName():
                                         session["userName"] = newUserName
                                         flash("user name changed", "success")
                                         return redirect(f"/user/{newUserName.lower()}")
-                                    case False:
+                                else:
                                         flash(
                                             "This username is already taken.", "error"
                                         )
-                    case False:
+                else:
                         flash("username does not fit ascii charecters", "error")
 
             return render_template("changeUserName.html", form=form)
