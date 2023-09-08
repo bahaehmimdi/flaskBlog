@@ -42,17 +42,13 @@ def search(query):
     posts = []
     users = []
     empty = False
-    match queryTags == []:
-        case False:
+    if not queryTags == []:
             posts.append(queryTags)
-    match queryTitles == []:
-        case False:
+    if not queryTitles == []:
             posts.append(queryTitles)
-    match queryAuthors == []:
-        case False:
+    if not queryAuthors == []:
             posts.append(queryAuthors)
-    match queryUsers == []:
-        case False:
+    if not  queryUsers == []:
             users.append(queryUsers)
     if not posts and not users:
         empty = True
