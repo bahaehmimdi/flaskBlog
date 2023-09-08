@@ -18,8 +18,7 @@ createPostBlueprint = Blueprint("createPost", __name__)
 
 @createPostBlueprint.route("/createpost", methods=["GET", "POST"])
 def createPost():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             form = createPostForm(request.form)
             if request.method == "POST":
                 postTitle = request.form["postTitle"]
@@ -56,7 +55,7 @@ def createPost():
                         flash("You earned 20 points by posting ", "success")
                         return redirect("/")
             return render_template("createPost.html", form=form)
-        case False:
+    else:
             message("1", "USER NOT LOGGED IN")
             flash("you need loin for create a post", "error")
             return redirect("/login")
