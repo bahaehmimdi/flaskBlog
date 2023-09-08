@@ -24,14 +24,13 @@ def createPost():
                 postTitle = request.form["postTitle"]
                 postTags = request.form["postTags"]
                 postContent = request.form["postContent"]
-                match postContent == "":
-                    case True:
+                if postContent == "":
                         flash("post content not be empty", "error")
                         message(
                             "1",
                             f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                         )
-                    case False:
+                 else:
                         connection = sqlite3.connect("db/posts.db")
                         cursor = connection.cursor()
                         cursor.execute(
