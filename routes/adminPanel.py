@@ -12,10 +12,9 @@ def adminPanel():
                 f'select role from users where userName = "{session["userName"]}"'
             )
             role = cursor.fetchone()[0]
-            match role == "admin":
-                case True:
+            if role == "admin":
                     return render_template("adminPanel.html")
-                case False:
+            else False:
                     return redirect("/")
     else:
             return redirect("/")
