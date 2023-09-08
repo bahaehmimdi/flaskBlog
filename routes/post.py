@@ -24,8 +24,7 @@ def post(postID):
     cursor = connection.cursor()
     cursor.execute(f"select id from posts")
     posts = str(cursor.fetchall())
-    match str(postID) in posts:
-        case True:
+    if str(postID) in posts:
             message("2", f'POST: "{postID}" FOUND')
             connection = sqlite3.connect("db/posts.db")
             cursor = connection.cursor()
@@ -76,6 +75,6 @@ def post(postID):
                 form=form,
                 comments=comments,
             )
-        case False:
+     else:
             message("1", "404")
             return render_template("404.html")
