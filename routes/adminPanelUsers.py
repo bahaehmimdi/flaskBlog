@@ -14,8 +14,7 @@ adminPanelUsersBlueprint = Blueprint("adminPanelUsers", __name__)
 @adminPanelUsersBlueprint.route("/admin/users", methods=["GET", "POST"])
 @adminPanelUsersBlueprint.route("/adminpanel/users", methods=["GET", "POST"])
 def adminPanelUsers():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             connection = sqlite3.connect("db/users.db")
             cursor = connection.cursor()
             cursor.execute(
@@ -37,5 +36,5 @@ def adminPanelUsers():
                     )
                 case False:
                     return redirect("/")
-        case False:
+    else:
             return redirect("/")
