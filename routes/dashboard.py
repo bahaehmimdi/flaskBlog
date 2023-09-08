@@ -15,10 +15,8 @@ dashboardBlueprint = Blueprint("dashboard", __name__)
 
 @dashboardBlueprint.route("/dashboard/<userName>", methods=["GET", "POST"])
 def dashboard(userName):
-    match "userName" in session:
-        case True:
-            match session["userName"].lower() == userName.lower():
-                case True:
+    if "userName" in session:
+            if session["userName"].lower() == userName.lower():
                     connection = sqlite3.connect("db/posts.db")
                     cursor = connection.cursor()
                     cursor.execute(
@@ -51,13 +49,13 @@ def dashboard(userName):
                         showPosts=showPosts,
                         showComments=showComments,
                     )
-                case False:
+            else:    
                     message(
                         "1",
                         f'THIS IS DASHBOARD NOT BELONGS TO USER: "{session["userName"]}"',
                     )
                     return redirect(f'/dashboard/{session["userName"].lower()}')
-        case False:
+      else:
             message("1", "DASHBOARD CANNOT BE ACCESSED WITHOUT USER LOGIN")
             flash("you need login for reach to dashboard", "error")
             return redirect("/login/redirect=&dashboard&user")
