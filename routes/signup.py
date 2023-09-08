@@ -13,17 +13,15 @@ from helpers import (
     signUpForm,
     sha256_crypt,
 )
-
 signUpBlueprint = Blueprint("signup", __name__)
 
 
 @signUpBlueprint.route("/signup", methods=["GET", "POST"])
 def signup():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             message("1", f'USER: "{session["userName"]}" ALREADY LOGGED IN')
             return redirect("/")
-        case False:
+    else:
             form = signUpForm(request.form)
             if request.method == "POST":
                 userName = request.form["userName"]
@@ -39,25 +37,24 @@ def signup():
                 mails = str(cursor.fetchall())
                 if not userName in users and not email in mails:
                     if passwordConfirm == password:
-                        match userName.isascii():
-                            case True:
+                        if userName.isascii():
                                 password = sha256_crypt.hash(password)
                                 connection = sqlite3.connect("db/users.db")
                                 cursor = connection.cursor()
                                 cursor.execute(
-                                    f"""
+                                    f'''
                                     insert into users(userName,email,password,profilePicture,role,points,creationDate,creationTime) 
                                     values("{userName}","{email}","{password}",
                                     "https://api.dicebear.com/5.x/identicon/svg?seed={secrets.token_urlsafe(32)}",
                                     "user",0,
                                     "{currentDate()}",
-                                    "{currentTime()}")
-                                    """
-                                )
+                                    "{currentTime()}"''')
+                                    
+                                
                                 connection.commit()
                                 message("2", f'USER: "{userName}" ADDED TO DATABASE')
                                 return redirect("/")
-                            case False:
+                        else:    
                                 message(
                                     "1",
                                     f'USERNAME: "{userName}" DOES NOT FITS ASCII CHARACTERS',
