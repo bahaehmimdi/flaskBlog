@@ -75,6 +75,6 @@ def post(postID):
                 form=form,
                 comments=comments,
             )
-     else:
+    else:
             message("1", "404")
             return render_template("404.html")
