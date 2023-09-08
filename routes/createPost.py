@@ -30,7 +30,7 @@ def createPost():
                             "1",
                             f'POST CONTENT NOT BE EMPTY USER: "{session["userName"]}"',
                         )
-                 else:
+                else:
                         connection = sqlite3.connect("db/posts.db")
                         cursor = connection.cursor()
                         cursor.execute(
