@@ -5,8 +5,7 @@ adminPanelBlueprint = Blueprint("adminPanel", __name__)
 
 @adminPanelBlueprint.route("/admin")
 def adminPanel():
-    match "userName" in session:
-        case True:
+    if "userName" in session:
             connection = sqlite3.connect("db/users.db")
             cursor = connection.cursor()
             cursor.execute(
@@ -18,5 +17,5 @@ def adminPanel():
                     return render_template("adminPanel.html")
                 case False:
                     return redirect("/")
-        case False:
+    else:
             return redirect("/")
