@@ -14,7 +14,7 @@ def adminPanel():
             role = cursor.fetchone()[0]
             if role == "admin":
                     return render_template("adminPanel.html")
-            else False:
+            else :
                     return redirect("/")
     else:
             return redirect("/")
