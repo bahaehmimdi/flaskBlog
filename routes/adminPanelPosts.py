@@ -24,8 +24,7 @@ def adminPanelPosts():
             if request.method == "POST":
                 if "postDeleteButton" in request.form:
                     deletePost(request.form["postID"])
-            match role == "admin":
-                case True:
+            if role == "admin":
                     connection = sqlite3.connect("db/posts.db")
                     cursor = connection.cursor()
                     cursor.execute("select * from posts")
@@ -33,7 +32,7 @@ def adminPanelPosts():
                     return render_template(
                         "dashboard.html", posts=posts, showPosts=True
                     )
-                case False:
+            else:
                     return redirect("/")
     else:
             return redirect("/")
