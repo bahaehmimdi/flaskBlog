@@ -22,8 +22,7 @@ def editPost(postID):
             cursor = connection.cursor()
             cursor.execute(f"select id from posts")
             posts = str(cursor.fetchall())
-            match str(postID) in posts:
-                case True:
+            if str(postID) in posts:
                     connection = sqlite3.connect("db/posts.db")
                     cursor = connection.cursor()
                     cursor.execute(f"select * from posts where id = {postID}")
@@ -86,7 +85,7 @@ def editPost(postID):
                                 f'THIS POST DOES NOT BELONG TO USER: "{session["userName"]}"',
                             )
                             return redirect("/")
-                case False:
+            else:   
                     message("1", f'POST: "{postID}" NOT FOUND')
                     return render_template("404.html")
     else::
