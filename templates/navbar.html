@@ -66,15 +66,16 @@
     </div>
   </div>
   <script src="/static/js/navbar.js"></script>
+     <div style="max-width: 10vw;max-height: 5vh;">
+        <img src="/static/banner.png" alt="Banner Image">
+    </div>
 </div>
   <div class="navbar" id="navbar" style="width:100%">
         {% for category in categories %}
         <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
         {% endfor %}
     </div>
-   <div style="width: 10vw;height: 1vh;">
-        <img src="/static/banner.png" alt="Banner Image">
-    </div>
+
  <script>
         function fillSearch(category) {
             document.getElementById('searchInput').value = category;
