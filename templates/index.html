@@ -4,10 +4,29 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/index.css') }}"
 />
+   <div id="navbar">
+        {% for category in categories %}
+        <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
+        {% endfor %}
+    </div>
+ <script>
+        function fillSearch(category) {
+            document.getElementById('searchInput').value = category;
+        }
+
+        function search() {
+            // Get the search input value
+            var searchTerm = document.getElementById('searchInput').value;
+            
+            // Perform the search action (you can replace this with your search logic)
+            alert('Searching for: ' + searchTerm);
+        }
+    </script>
 {% endblock head %} {%block body%} {% for post in posts %}
 <div class="post centeredHorizontally">
   <a class="title textPrimary" href="post/{{post[0]}}">{{post[1]}}</a>
   <div class="content" tag="content">{{post[3]|safe}}</div>
   <a href="post/{{post[0]}}" class="btn btnLink">read more</a>
 </div>
+
 {% endfor %} {% endblock body %}
