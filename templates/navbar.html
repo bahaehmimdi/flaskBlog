@@ -66,14 +66,15 @@
     </div>
   </div>
   <script src="/static/js/navbar.js"></script>
-     <div style="max-width: 10vw;max-height: 5vh;">
-        <img src="/static/banner.png" alt="Banner Image">
-    </div>
+
 </div>
   <div class="navbar" id="navbar" style="width:100%">
         {% for category in categories %}
         <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
         {% endfor %}
+         <div style="max-width: 20vw;max-height: 5vh;">
+        <img src="/static/banner.png" alt="Banner Image">
+    </div>
     </div>
 
  <script>
