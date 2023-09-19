@@ -12,15 +12,10 @@
  <script>
         function fillSearch(category) {
             document.getElementById('searchInput').value = category;
+          search();
         }
 
-        function search() {
-            // Get the search input value
-            var searchTerm = document.getElementById('searchInput').value;
-            
-            // Perform the search action (you can replace this with your search logic)
-            alert('Searching for: ' + searchTerm);
-        }
+
     </script>
 {% endblock head %} {%block body%} {% for post in posts %}
 <div class="post centeredHorizontally">
