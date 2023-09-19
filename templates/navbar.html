@@ -72,11 +72,11 @@
         {% for category in categories %}
         <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
         {% endfor %}
-         <div style="width: 100%w;height: 100px;display: block;">
+        
+    </div>
+ <div style="width: 100%;height: 10px;display: block;">
         <img src="/static/banner.png" alt="Banner Image">
     </div>
-    </div>
-
  <script>
         function fillSearch(category) {
             document.getElementById('searchInput').value = category;
