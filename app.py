@@ -39,6 +39,12 @@ commentsTable()
 app = Flask(__name__)
 app.secret_key = secrets.token_urlsafe(32)
 app.config["SESSION_PERMANENT"] = True
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+@app.route('/terms-of-service')
+def terms_of_service():
+    return render_template('terms_of_service.html')
 csrf = CSRFProtect(app)
 
 
