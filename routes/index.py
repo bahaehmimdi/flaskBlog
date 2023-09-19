@@ -11,6 +11,9 @@ indexBlueprint = Blueprint("index", __name__)
 @app.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy_policy.html')
+@app.route('/terms-of-service')
+def terms_of_service():
+    return render_template('terms_of_service.html')
 
 @indexBlueprint.route("/")
 def index():
