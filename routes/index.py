@@ -13,7 +13,9 @@ def index():
     cursor = connection.cursor()
     cursor.execute("select * from posts")
     posts = cursor.fetchall()
+    categories = ["Home", "Depremler", "Category 2", "Category 3", "Category 4"]
+
     return render_template(
         "index.html",
-        posts=posts,
+        posts=posts, categories=categories
     )
