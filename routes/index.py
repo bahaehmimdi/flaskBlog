@@ -7,6 +7,11 @@ from helpers import (
 indexBlueprint = Blueprint("index", __name__)
 
 
+
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
 @indexBlueprint.route("/")
 def index():
     connection = sqlite3.connect("db/posts.db")
