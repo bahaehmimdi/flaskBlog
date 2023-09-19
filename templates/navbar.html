@@ -39,24 +39,7 @@
     {% endif %}
        
   </div>
-  <div id="navbar" style="width:100%">
-        {% for category in categories %}
-        <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
-        {% endfor %}
-    </div>
- <script>
-        function fillSearch(category) {
-            document.getElementById('searchInput').value = category;
-            var input = category;
-    if (input === "" || input.replace(/\s/g, "") === "") {
-    } else {
-        window.location.href = `/search/${input.replace(/\s/g, "+")}`;
-    }  
 
-        }
-
-
-    </script>
   <div class="hamburger">
     <button onclick="hamburger()" class="hamburgerBtn">🍔</button>
     <div id="hamburgerDropdown" class="hamburgerContent">
@@ -84,3 +67,21 @@
   </div>
   <script src="/static/js/navbar.js"></script>
 </div>
+  <div class="navbar" id="navbar" style="width:100%">
+        {% for category in categories %}
+        <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
+        {% endfor %}
+    </div>
+ <script>
+        function fillSearch(category) {
+            document.getElementById('searchInput').value = category;
+            var input = category;
+    if (input === "" || input.replace(/\s/g, "") === "") {
+    } else {
+        window.location.href = `/search/${input.replace(/\s/g, "+")}`;
+    }  
+
+        }
+
+
+    </script>
