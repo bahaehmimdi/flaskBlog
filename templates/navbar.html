@@ -37,6 +37,24 @@
     <a href="/login/redirect=&"><button class="btn btnLink">Login</button></a>
     <a href="/signup"><button class="btn btnPrimary">Sign Up</button></a>
     {% endif %}
+       <div id="navbar" style="left:50%">
+        {% for category in categories %}
+        <a href="#" onclick="fillSearch('{{ category }}')">{{ category }}</a>
+        {% endfor %}
+    </div>
+ <script>
+        function fillSearch(category) {
+            document.getElementById('searchInput').value = category;
+            var input = category;
+    if (input === "" || input.replace(/\s/g, "") === "") {
+    } else {
+        window.location.href = `/search/${input.replace(/\s/g, "+")}`;
+    }  
+
+        }
+
+
+    </script>
   </div>
   <div class="hamburger">
     <button onclick="hamburger()" class="hamburgerBtn">🍔</button>
