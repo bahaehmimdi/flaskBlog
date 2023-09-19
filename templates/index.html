@@ -12,8 +12,23 @@
  <script>
         function fillSearch(category) {
             document.getElementById('searchInput').value = category;
-          search();
-        }
+var searchBar = document.getElementById('searchBar');
+
+// Check if the "searchBar" div element exists
+if (searchBar) {
+  // Find the first button element within the "searchBar" div
+  var firstButton = searchBar.querySelector('button');
+
+  // Check if a button element was found
+  if (firstButton) {
+    // Emulate a click on the first button
+    firstButton.click();
+  } else {
+    console.error("No button found within the searchBar div.");
+  }
+} else {
+  console.error("SearchBar div not found.");
+}        }
 
 
     </script>
