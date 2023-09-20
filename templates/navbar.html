@@ -3,9 +3,9 @@
   href="{{ url_for('static', filename='css/navbar.css') }}"
 />
 
-<div class="navbar">
-  <a hidden href="/"><h1 class="btn btnLink btnHome">flaskBlog</h1></a>
-  <div  class="searchBar" style="display:none">
+<div class="navbar"  style="display:none">
+  <a  href="/"><h1 class="btn btnLink btnHome">flaskBlog</h1></a>
+  <div  class="searchBar">
     <input
       type="text"
       id="searchInput"
@@ -15,7 +15,8 @@
       onchange="search()"
     /><button onclick="search()" class="btn">🔍</button>
   </div>
-  <div class="btns">
+  
+  <div class="btns" >
     {% if session["userName"] %}
     <a href="/createpost">
       <button class="btn btnLink">New Post</button>
