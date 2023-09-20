@@ -42,13 +42,11 @@
        
   </div>
 
-  <div class="hamburger">
+  <div class="hamburger"  style="float: left; width: 80%;">
     <button onclick="hamburger()" class="hamburgerBtn"  style="display:none">🍔</button>
     <div id="hamburgerDropdown" class="hamburgerContent"  style="display:none">
-        <div class="left-div" style="float: left; width: 70%;">
-    <!-- Content for the left div -->
-  </div>
-  <div class="right-element" style="float: right; width: 30%;">
+     
+  <div class="right-element" >
     <!-- Content for the element on the right -->
          {% if session["userName"] %}
       <a href="/user/{{session['userName'].lower()}}">
