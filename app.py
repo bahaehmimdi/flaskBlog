@@ -45,9 +45,9 @@ def privacy_policy():
 @app.route('/terms-of-service')
 def terms_of_service():
     return render_template('terms_of_service.html')
-@app.route('/test')
-def test():
-    return "" ,100
+#@app.route('/test')
+#def test():
+ #   return ""
 csrf = CSRFProtect(app)
 
 
