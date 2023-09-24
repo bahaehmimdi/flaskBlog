@@ -47,7 +47,7 @@ def terms_of_service():
     return render_template('terms_of_service.html')
 @app.route('/test')
 def test():
-    return "" 
+    return "" ,100
 csrf = CSRFProtect(app)
 
 
